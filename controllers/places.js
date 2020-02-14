@@ -1,26 +1,29 @@
 const Places = require('../models/places');
 
 exports.readAll = (req, res, next) => {
-    Places.find({}, (err, lists) => {
+    Places.find({}, (err, places) => {
         if (err) return next(err);
-        return res.send(lists);
+        return res.send(places);
     });
 };
 
 exports.read = (req, res, next) => {
-    Places.findOne({ _id: req.params.id }, (err, list) => {
+    Places.findOne({ _id: req.params.id }, (err, place) => {
         if (err) return next(err);
-        return res.send(list);
+        return res.send(place);
     });
 };
 
 exports.create = (req, res, next) => {
     const newPlace = new Places({
-        
+        name: req.body.name,
+        lat: req.body.lat,
+        lng: req.body.lng,
+        imageUrl: req.body.imageUrl
     });
-    newPlace.save((err, list) => {
+    newPlace.save((err, place) => {
         if (err) return next(err);
-        return res.send(list);
+        return res.send(place);
     });
 };
 
@@ -32,19 +35,19 @@ exports.delete = (req, res, next) => {
 };
 
 exports.update = (req, res, next) => {
-    let set = {};
-
-    if (req.body.name != undefined) set['$.name'] = req.body.name;
-    // if (req.body.bought != undefined) set['$.bought'] = req.body.bought;
+    let set = {
+        name: req.body.name,
+        imageUrl: req.body.imageUrl
+    };
 
     Places.findOneAndUpdate(
-        { _id: req.params.listid },
+        { _id: req.params.id },
         { $set: set },
-        { new: false },
-        (err, list) => {
+        { new: true },
+        (err, place) => {
             if (err) return next(err);
-            if (!list) return res.status(404).json({ error: "Can not find item" });
-            return res.send(list);
+            if (!place) return res.status(404).json({ error: "Can not find item" });
+            return res.send(place);
         }
     );
 };
