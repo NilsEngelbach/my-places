@@ -81,7 +81,7 @@ function markerOnClick(event) {
     L.DomUtil.get("button-delete-" + marker._leaflet_id),
     "click",
     (e) => {
-      (marker.options.id !== undefined) ? mymap.removeLayer(marker) : deletePlace(marker);
+      (marker.options.id !== undefined) ? deletePlace(marker) : mymap.removeLayer(marker);
     }
   );
 }
