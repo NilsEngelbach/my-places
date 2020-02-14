@@ -1,9 +1,6 @@
 # Places API (& UI)
 
-The Places API is a NodeJs web application to manage places you have visited.  
-
-It provides a REST API (& UI), where you can
-- 
+The Places API is a NodeJs web application to manage places you have visited. It provides a REST API (& UI) to manage the log visited places (image, name, gps coordinates).
 
 All data is stored in a [MongoDB](https://www.mongodb.com/).
 
