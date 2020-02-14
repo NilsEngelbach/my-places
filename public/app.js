@@ -29,7 +29,7 @@ mymap.on("click", e => {
     .fire("click");
 });
 
-// Build the Popup menu and register event listeners
+// Build the popup menu and register event listeners
 function markerOnClick(event) {
 
   const marker = event.target;
